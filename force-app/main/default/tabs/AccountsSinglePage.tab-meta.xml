@@ -2,6 +2,6 @@
 <CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
     <description>Created by Lightning App Builder</description>
     <flexiPage>AccountsSinglePage</flexiPage>
-    <label>AccountsSinglePage</label>
+    <label>Accounts Single Page</label>
     <motif>Custom15: People</motif>
 </CustomTab>
