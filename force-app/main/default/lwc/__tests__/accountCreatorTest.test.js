@@ -30,7 +30,7 @@ describe('c-accountCreator', () => {
         return Promise.resolve().then(() => {
             expect(mockFn.mock.calls[0][0].detail.title).toBe('Success!');
             expect(mockFn.mock.calls[0][0].detail.message).toBe('Account successfully created!');
-            expect(mockFn.mock.calls[0][0].detail.variant).toBe('Success');
+            expect(mockFn.mock.calls[0][0].detail.variant).toBe('success');
             expect(handlerBack.mock.calls.length).toBe(1);
         });
 

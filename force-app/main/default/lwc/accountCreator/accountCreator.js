@@ -12,7 +12,7 @@ export default class AccountCreator extends LightningElement {
         const showSuccess = new ShowToastEvent({
             title: 'Success!',
             message: 'Account successfully created!',
-            variant: 'Success'
+            variant: 'success'
         });
         this.dispatchEvent(showSuccess);
     }
