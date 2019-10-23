@@ -43,13 +43,13 @@ describe('c-accountsInfo', () => {
 
         getAccountList.mockResolvedValue(APEX_ACCOUNTS_SUCCESS);
 
-        const element = createElement('c-accountsInfo', {
+        let element = createElement('c-accountsInfo', {
             is: AccountsInfo
         });
         document.body.appendChild(element);
 
         return flushPromises().then(() => {
-            const accTable = element.shadowRoot.querySelector('c-account-table');
+            let accTable = element.shadowRoot.querySelector('c-account-table');
             accTable.dispatchEvent(new CustomEvent('next'));
             accTable.dispatchEvent(new CustomEvent('previous'));
             accTable.dispatchEvent(new CustomEvent('last'));

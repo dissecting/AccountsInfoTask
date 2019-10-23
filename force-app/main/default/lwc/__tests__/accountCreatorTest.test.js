@@ -3,7 +3,7 @@ import AccountCreator from 'c/accountCreator';
 import { ShowToastEventName } from 'lightning/platformShowToastEvent';
 import { createRecord } from 'lightning/uiRecordApi';
 
-const mockCreateRecord = require('./data/createRecord.json');
+const MOCK_CREATE_RECORD = require('./data/createRecord.json');
 
 describe('c-accountCreator', () => {
     afterEach(() => {
@@ -14,18 +14,18 @@ describe('c-accountCreator', () => {
         jest.clearAllMocks();
     });
     it('displays creator form', () => {
-        createRecord.mockResolvedValue(mockCreateRecord);
-        const element = createElement('c-accountCreator', {
+        createRecord.mockResolvedValue(MOCK_CREATE_RECORD);
+        let element = createElement('c-accountCreator', {
             is: AccountCreator
         });
         document.body.appendChild(element);
-        const mockFn = jest.fn();
+        let mockFn = jest.fn();
         element.addEventListener(ShowToastEventName, mockFn);
-        const recordForm = element.shadowRoot.querySelector('lightning-record-form');
+        let recordForm = element.shadowRoot.querySelector('lightning-record-form');
         recordForm.dispatchEvent(new CustomEvent('success'));
-        const handlerBack = jest.fn();
+        let handlerBack = jest.fn();
         element.addEventListener('back', handlerBack);
-        const lhtgBtn = element.shadowRoot.querySelector('lightning-button');
+        let lhtgBtn = element.shadowRoot.querySelector('lightning-button');
         lhtgBtn.click();
         return Promise.resolve().then(() => {
             expect(mockFn.mock.calls[0][0].detail.title).toBe('Success!');

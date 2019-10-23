@@ -9,28 +9,28 @@ describe('c-accountTable', () => {
     });
 
     it('pagination', () => {
-        const element = createElement('c-accountTable', {
+        let element = createElement('c-accountTable', {
             is: AccountTable
         });
         document.body.appendChild(element);
-        const handlerFirst = jest.fn();
-        const handlerPrevious = jest.fn();
-        const handlerNext = jest.fn();
-        const handlerLast = jest.fn();
-        const handlerNewRecord = jest.fn();
+        let handlerFirst = jest.fn();
+        let handlerPrevious = jest.fn();
+        let handlerNext = jest.fn();
+        let handlerLast = jest.fn();
+        let handlerNewRecord = jest.fn();
         element.addEventListener('first', handlerFirst);
         element.addEventListener('previous', handlerPrevious);
         element.addEventListener('next', handlerNext);
         element.addEventListener('last', handlerLast);
         element.addEventListener('new', handlerNewRecord);
 
-        const lhtgBtn = element.shadowRoot.querySelectorAll('lightning-button');
+        let lhtgBtn = element.shadowRoot.querySelectorAll('lightning-button');
         lhtgBtn.forEach(btn => {
             btn.click();
         });
 
         return Promise.resolve().then(() => {
-            /*const dataTable = element.shadowRoot.querySelector('lightning-datatable');
+            /*let dataTable = element.shadowRoot.querySelector('lightning-datatable');
             dataTable.dispatchEvent(new CustomEvent('rowaction'));*/
 
             expect(handlerFirst.mock.calls.length).toBe(1);

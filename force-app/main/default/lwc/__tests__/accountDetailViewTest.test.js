@@ -9,14 +9,14 @@ describe('c-accountDetailView', () => {
     });
 
     it('displays details', () => {
-        const element = createElement('c-accountDetailView', {
+        let element = createElement('c-accountDetailView', {
             is: AccountDetailView
         });
         document.body.appendChild(element);
-        const handlerBack = jest.fn();
+        let handlerBack = jest.fn();
         element.addEventListener('back', handlerBack);
 
-        const lhtgBtn = element.shadowRoot.querySelector('lightning-button');
+        let lhtgBtn = element.shadowRoot.querySelector('lightning-button');
         lhtgBtn.click();
 
         return Promise.resolve().then(() => {
