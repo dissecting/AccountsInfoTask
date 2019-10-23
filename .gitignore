@@ -35,3 +35,4 @@ config/*
 coverage/*
 force-app/main/default/lwc/.eslintrc.json
 force-app/main/default/lwc/jsconfig.json
+package-lock.json
