@@ -2,7 +2,7 @@
 private class AccountsInfoControllerTest {
 
     @testSetup
-    static void prepareData() {
+    private static void prepareData() {
         List<Account> prepareAccountsList = new List<Account>();
         Account account = new Account (
             Name = 'TestName1',
@@ -13,7 +13,7 @@ private class AccountsInfoControllerTest {
     }
 
 	@isTest
-    static void getAccountsTest() {
+    private static void getAccountsTest() {
         List<Account> accountsList = [
             SELECT Name, Phone
             FROM Account
