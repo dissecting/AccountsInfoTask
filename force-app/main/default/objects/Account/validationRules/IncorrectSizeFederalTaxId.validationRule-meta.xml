@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IncorrectSizeFederalTaxId</fullName>
+    <active>false</active>
+    <errorConditionFormula>LEN(FederalTaxId__c) &lt;&gt; 8</errorConditionFormula>
+    <errorDisplayField>FederalTaxId__c</errorDisplayField>
+    <errorMessage>Federal Tax Id should be eight-digit!</errorMessage>
+</ValidationRule>

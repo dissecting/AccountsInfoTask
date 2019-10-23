@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IncorrectTypeFederalTaxId</fullName>
+    <active>false</active>
+    <errorConditionFormula>NOT (
+ ISNUMBER(FederalTaxId__c) 
+)</errorConditionFormula>
+    <errorDisplayField>FederalTaxId__c</errorDisplayField>
+    <errorMessage>Federal Tax Id should be type of Number</errorMessage>
+</ValidationRule>

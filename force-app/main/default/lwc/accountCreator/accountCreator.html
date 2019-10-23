@@ -1,0 +1,14 @@
+<template>
+    <lightning-record-form
+        object-api-name="Account"
+        fields={fields}
+        onsuccess={handleSuccess}>
+    </lightning-record-form>
+    <div>
+        <lightning-button
+            label="Back"
+            icon-name="utility:chevronleft"
+            onclick={handleBack}>
+        </lightning-button>
+    </div>
+</template>

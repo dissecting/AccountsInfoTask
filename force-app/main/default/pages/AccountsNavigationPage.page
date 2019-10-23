@@ -1,0 +1,13 @@
+<apex:page >
+    <apex:includeLightning />
+    <div id = "lightning" />
+    <script>
+        $Lightning.use("c:AccountsInfoApp", function() {
+            $Lightning.createComponent(
+                "c:accountsInfo",
+                {},
+                "lightning"
+          );
+        });
+    </script>
+</apex:page>

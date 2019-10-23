@@ -1,0 +1,60 @@
+<template>
+    <div>
+        <div>
+            <lightning-datatable
+                key-field="Id"
+                data={accounts}
+                columns={columns}
+                hide-checkbox-column="true"
+                onrowaction={getRecordId}>
+            </lightning-datatable>
+        </div>
+        <div class="slds-align_absolute-center">
+            <div class="slds-text-title_bold">
+                <span>Page: {page} of {totalPages}</span>
+            </div>
+            <div class="slds-m-around--large">
+                <lightning-button-group>
+                    <lightning-button
+                        label="First"
+                        icon-name="utility:left"
+                        variant="brand-outline"
+                        disabled={isFirstPage}
+                        onclick={handleFirst}>
+                    </lightning-button>
+                    <lightning-button
+                        label="Previous"
+                        icon-name="utility:chevronleft"
+                        variant="neutral"
+                        disabled={isFirstPage}
+                        onclick={handlePrevious}>
+                    </lightning-button>
+                    <lightning-button
+                        label="Next"
+                        icon-name="utility:chevronright"
+                        icon-position="right"
+                        variant="neutral"
+                        disabled={isLastPage}
+                        onclick={handleNext}>
+                    </lightning-button>
+                    <lightning-button
+                        label="Last"
+                        icon-name="utility:right"
+                        icon-position="right"
+                        variant="brand-outline"
+                        disabled={isLastPage}
+                        onclick={handleLast}>
+                    </lightning-button>
+                </lightning-button-group>
+            </div>
+            <div class="slds-m-around--large">
+                <lightning-button
+                    label="New"
+                    icon-name="utility:new"
+                    variant="brand"
+                    onclick={handleNewRecord}>
+                </lightning-button>
+            </div>
+        </div>
+    </div>
+</template>

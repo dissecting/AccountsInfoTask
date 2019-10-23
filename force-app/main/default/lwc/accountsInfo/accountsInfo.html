@@ -1,0 +1,39 @@
+<template>
+    <lightning-card title="Accounts" icon-name="custom:custom63">
+        <div class="slds-m-around_large">
+            <div if:false={isLoaded} class="slds-is-relative">
+                <lightning-spinner
+                    alternative-text="Loading...">
+                </lightning-spinner>
+            </div>
+        </div>
+        <template if:true={results}>
+            <c-account-table
+                onprevious={handlePrevious}
+                onnext={handleNext}
+                onfirst={handleFirst}
+                onlast={handleLast}
+                onnew={handleNewRecord}
+                onrowid={getRecordId}
+                accounts={results.accounts}
+                columns={columns}
+                page={page}
+                total-pages={totalPages}
+                is-first-page={isFirstPage}
+                is-last-page={isLastPage}>
+            </c-account-table>
+        </template>
+        <template if:true={recordId}>
+            <c-account-detail-view
+                onback={handleBack}
+                record-id={recordId}>
+            </c-account-detail-view>
+        </template>
+        <template if:true={fields}>
+            <c-account-creator
+                onback={handleBack}
+                fields={fields}>
+            </c-account-creator>
+        </template>
+    </lightning-card>
+</template>

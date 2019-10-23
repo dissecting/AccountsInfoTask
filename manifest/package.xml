@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+	<types>
+		<members>AccountsInfoController</members>
+		<name>ApexClass</name>
+	</types>
+	<types>
+		<members>AccountsNavigationPage</members>
+		<name>ApexPage</name>
+	</types>
+	<types>
+		<members>AccountsInfoApp</members>
+		<name>AuraDefinitionBundle</name>
+	</types>
+	<types>
+		<members>Account</members>
+		<name>CustomObject</name>
+	</types>
+	<types>
+		<members>AccountsNavigation</members>
+		<members>AccountsSinglePage</members>
+		<name>CustomTab</name>
+	</types>
+	<types>
+		<members>AccountsSinglePage</members>
+		<name>FlexiPage</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>LightningComponentBundle</name>
+	</types>
+	<version>46.0</version>
+</Package>

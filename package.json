@@ -1,0 +1,33 @@
+{
+  "name": "accountstasklwc",
+  "version": "1.0.0",
+  "description": "This guide helps Salesforce developers who are new to Visual Studio Code go from zero to a deployed app using Salesforce Extensions for VS Code and Salesforce CLI.",
+  "main": "index.js",
+  "scripts": {
+    "test:unit": "lwc-jest",
+    "test:unit:watch": "lwc-jest --watch",
+    "test:unit:debug": "lwc-jest --debug",
+    "test:unit:coverage": "lwc-jest --coverage",
+    "test": "npm install"
+  },
+  "author": "Kobrusev",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@lwc/jest-preset": "^2.2.0",
+    "@lwc/jest-resolver": "^2.2.0",
+    "@lwc/jest-transformer": "^2.2.0",
+    "@lwc/synthetic-shadow": "^1.1.1",
+    "@salesforce/lwc-jest": "^0.5.5",
+    "@salesforce/sfdx-lwc-jest": "^0.5.5",
+    "jest": "^24.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dissecting/AccountsInfoTask.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dissecting/AccountsInfoTask/issues"
+  },
+  "homepage": "https://github.com/dissecting/AccountsInfoTask#readme"
+}
