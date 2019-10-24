@@ -33,6 +33,4 @@ $RECYCLE.BIN/
 config/*
 .vim-force.com/
 coverage/*
-force-app/main/default/lwc/.eslintrc.json
-force-app/main/default/lwc/jsconfig.json
 package-lock.json
