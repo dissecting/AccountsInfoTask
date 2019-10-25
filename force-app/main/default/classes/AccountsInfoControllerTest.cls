@@ -28,21 +28,35 @@ private class AccountsInfoControllerTest {
             FROM Account
         ];
         List<Schema.FieldSetMember> fieldSet = SObjectType.Account.FieldSets.AccountFieldSet.getFields();
-        List<String> fieldSetItems = new List<String>();
+        List<String> fieldSetNameList = new List<String>();
         List<String> fieldSetTypeList = new List<String>();
+        List<String> fieldSetLabelList = new List<String>();
+        List<String> nameUpdateableList = new List<String>();
 
         for (Schema.FieldSetMember f : fieldSet) {
-            fieldSetItems.add(f.getFieldPath());
-            fieldSetTypeList.add(String.valueOf(f.getType()));
+            if (!f.getFieldPath().contains('.')) {
+                fieldSetNameList.add(f.getFieldPath());
+                fieldSetTypeList.add(String.valueOf(f.getType()));
+                fieldSetLabelList.add(f.getLabel());
+                Schema.DescribeFieldResult describeFieldResult =
+                    Schema.getGlobalDescribe().get('Account').getDescribe().fields.getMap().get(f.getFieldPath()).getDescribe();
+                if (describeFieldResult.isUpdateable()) {
+                    nameUpdateableList.add(f.getFieldPath());
+                }
+            }
         }
 
-        if (!fieldSetItems.contains('Name')) {
-            fieldSetItems.add(0, 'Name');
+        if (!fieldSetNameList.contains('Name')) {
+            fieldSetNameList.add(0, 'Name');
             fieldSetTypeList.add(0, 'TEXT');
+            fieldSetLabelList.add(0, 'Account Name');
+            nameUpdateableList.add(0, 'Name');
         }
 
         System.assertEquals(resultList.accounts.size(), listAccounts.size());
-        System.assertEquals(resultList.accountFields.size(), fieldSetItems.size());
+        System.assertEquals(resultList.accountFields.size(), fieldSetNameList.size());
+        System.assertEquals(resultList.accountUpdateableColumns.size(), nameUpdateableList.size());
+        System.assertEquals(resultList.accountColumns.size(), fieldSetTypeList.size());
         System.assertEquals(resultList.accountCount, 1);
         System.assertEquals(resultList.accountFieldTypes.size(), fieldSetTypeList.size());
     }

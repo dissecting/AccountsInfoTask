@@ -22,7 +22,6 @@ public with sharing class AccountsInfoController {
                 }
             }
         }
-        System.debug(LoggingLevel.INFO, '*** nameUpdateableList ' + nameUpdateableList);
 
         if (!fieldSetNameList.contains('Name')) {
             fieldSetNameList.add(0, 'Name');
