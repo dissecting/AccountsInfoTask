@@ -16,8 +16,10 @@ describe('c-accountDetailView', () => {
         let handlerBack = jest.fn();
         element.addEventListener('back', handlerBack);
 
-        let lhtgBtn = element.shadowRoot.querySelector('lightning-button');
-        lhtgBtn.click();
+        let lhtgBtn = element.shadowRoot.querySelectorAll('lightning-button');
+        lhtgBtn.forEach(btn => {
+            btn.click();
+        });
 
         return Promise.resolve().then(() => {
             expect(handlerBack.mock.calls.length).toBe(1);

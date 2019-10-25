@@ -30,9 +30,6 @@ describe('c-accountTable', () => {
         });
 
         return Promise.resolve().then(() => {
-            /*let dataTable = element.shadowRoot.querySelector('lightning-datatable');
-            dataTable.dispatchEvent(new CustomEvent('rowaction'));*/
-
             expect(handlerFirst.mock.calls.length).toBe(1);
             expect(handlerPrevious.mock.calls.length).toBe(1);
             expect(handlerNext.mock.calls.length).toBe(1);

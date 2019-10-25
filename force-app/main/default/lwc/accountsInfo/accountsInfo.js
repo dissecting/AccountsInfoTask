@@ -7,13 +7,25 @@ export default class AccountsInfo extends LightningElement {
     @track results;
     @track error;
     @track columns = [];
-    @track fields;
     @track recordId;
+    @track pageType;
     @api isLoaded = false;
     @api page = 1;
     totalPages;
     isFirstPage = true;
     isLastPage = this.totalPages === 1 ? true : false;
+
+    get isTablePage() {
+        return this.pageType === "tablePage" ? true : false;
+    }
+
+    get isViewPage() {
+        return this.pageType === "viewPage" ? true : false;
+    }
+
+    get isCreateRecordPage() {
+        return this.pageType === "createRecordPage" ? true : false;
+    }
 
     handlePrevious() {
         if (this.page > 1) {
@@ -55,16 +67,12 @@ export default class AccountsInfo extends LightningElement {
         this.handleGetAccounts();
     }
 
-    handleRefresh() {
-        this.results = undefined;
-        this.columns = [];
-    }
-
     handleGetAccounts() {
         this.isLoaded = false;
         getAccountList({ pageSize: PAGE_SIZE, pageNumber: this.page })
             .then(result => {
                 this.setAccounts(result);
+                this.pageType = "tablePage";
                 this.isLoaded = true;
             })
             .catch(error => {
@@ -81,14 +89,14 @@ export default class AccountsInfo extends LightningElement {
         for (let i = 0; i < this.results.accountFields.length; i++) {
             if (this.results.accountFields[i] === 'Name') {
                 this.columns.push({
-                    label: this.results.accountFields[i],
+                    label: this.results.accountColumns[i],
                     fieldName: this.results.accountFields[i],
                     type: 'button',
                     typeAttributes: {label: { fieldName: 'Name' }, variant: 'base'}
                 });
             } else if (this.results.accountFieldTypes[i] === 'DATETIME') {
                 this.columns.push({
-                    label: this.results.accountFields[i],
+                    label: this.results.accountColumns[i],
                     fieldName: this.results.accountFields[i],
                     type: 'date',
                     typeAttributes: {
@@ -103,7 +111,7 @@ export default class AccountsInfo extends LightningElement {
                 });
             } else {
                 this.columns.push({
-                    label: this.results.accountFields[i],
+                    label: this.results.accountColumns[i],
                     fieldName: this.results.accountFields[i]
                 });
             }
@@ -112,19 +120,18 @@ export default class AccountsInfo extends LightningElement {
 
     getRecordId(event) {
         this.recordId = event.detail;
-        this.handleRefresh();
+        this.pageType = "viewPage";
     }
 
     @api
     handleBack() {
-        this.connectedCallback();
         this.recordId = undefined;
-        this.fields = undefined;
+        this.columns = [];
+        this.connectedCallback();
     }
 
     handleNewRecord() {
-        this.fields = this.results.accountFields;
-        this.handleRefresh();
+        this.pageType = "createRecordPage";
     }
 
     handlePageNumberCheck() {

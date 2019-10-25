@@ -1,10 +1,12 @@
 <template>
-    <lightning-record-form
-        object-api-name="Account"
-        fields={fields}
-        onsuccess={handleSuccess}>
-    </lightning-record-form>
-    <div>
+    <div class="record-from">
+        <lightning-record-form
+            object-api-name="Account"
+            fields={fields}
+            onsuccess={handleSuccess}>
+        </lightning-record-form>
+    </div>
+    <div class="button">
         <lightning-button
             label="Back"
             icon-name="utility:chevronleft"

@@ -16,6 +16,8 @@ const APEX_ACCOUNTS_SUCCESS  = {
     accountCount: 114,
     accountFields: ["Name", "CreatedDate", "Phone"],
     accountFieldTypes: ["TEXT", "DATETIME", "TEXT"],
+    accountColumns: ["Account Name", "Created Date", "Phone"],
+    accountUpdateableColumns: ["Name", "Phone"],
     accounts: [{"Name":"Test","CreatedDate":"2019-10-16T15:29:49.000Z","Id":"0016F00003RRsUfQAL"}]
 };
 
@@ -50,14 +52,13 @@ describe('c-accountsInfo', () => {
 
         return flushPromises().then(() => {
             let accTable = element.shadowRoot.querySelector('c-account-table');
+            accTable.dispatchEvent(new CustomEvent('rowid'));
             accTable.dispatchEvent(new CustomEvent('next'));
             accTable.dispatchEvent(new CustomEvent('previous'));
             accTable.dispatchEvent(new CustomEvent('last'));
             accTable.dispatchEvent(new CustomEvent('first'));
             accTable.dispatchEvent(new CustomEvent('new'));
-            accTable.dispatchEvent(new CustomEvent('rowid'));
             element.handleBack();
-
             expect(accTable).not.toBeNull();
         });
     });

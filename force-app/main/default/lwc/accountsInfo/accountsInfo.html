@@ -7,7 +7,7 @@
                 </lightning-spinner>
             </div>
         </div>
-        <template if:true={results}>
+        <div if:true={isTablePage}>
             <c-account-table
                 onprevious={handlePrevious}
                 onnext={handleNext}
@@ -22,18 +22,20 @@
                 is-first-page={isFirstPage}
                 is-last-page={isLastPage}>
             </c-account-table>
-        </template>
-        <template if:true={recordId}>
+        </div>
+        <div if:true={isViewPage}>
             <c-account-detail-view
                 onback={handleBack}
+                fields={results.accountFields}
+                updateable-fields={results.accountUpdateableColumns}
                 record-id={recordId}>
             </c-account-detail-view>
-        </template>
-        <template if:true={fields}>
+        </div>
+        <div if:true={isCreateRecordPage}>
             <c-account-creator
                 onback={handleBack}
-                fields={fields}>
+                fields={results.accountUpdateableColumns}>
             </c-account-creator>
-        </template>
+        </div>
     </lightning-card>
 </template>
