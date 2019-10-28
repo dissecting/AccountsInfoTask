@@ -68,12 +68,12 @@ export default class AccountsInfo extends LightningElement {
     }
 
     handleGetAccounts() {
-        this.isLoaded = false;
+        this.handleLoadStart();
         getAccountList({ pageSize: PAGE_SIZE, pageNumber: this.page })
             .then(result => {
                 this.setAccounts(result);
                 this.pageType = "tablePage";
-                this.isLoaded = true;
+                this.handleLoadFinish();
             })
             .catch(error => {
                 this.error = error;
@@ -87,10 +87,14 @@ export default class AccountsInfo extends LightningElement {
         this.totalPages = Math.ceil(this.results.accountCount / PAGE_SIZE);
 
         for (let i = 0; i < this.results.accountFields.length; i++) {
+            let isUpdatableField;
+            isUpdatableField = this.results.accountUpdateableColumns.includes(this.results.accountFields[i]) ?
+                true : false;
             if (this.results.accountFields[i] === 'Name') {
                 this.columns.push({
                     label: this.results.accountColumns[i],
                     fieldName: this.results.accountFields[i],
+                    editable: isUpdatableField,
                     type: 'button',
                     typeAttributes: {label: { fieldName: 'Name' }, variant: 'base'}
                 });
@@ -98,6 +102,7 @@ export default class AccountsInfo extends LightningElement {
                 this.columns.push({
                     label: this.results.accountColumns[i],
                     fieldName: this.results.accountFields[i],
+                    editable: isUpdatableField,
                     type: 'date',
                     typeAttributes: {
                         day: 'numeric',
@@ -112,6 +117,8 @@ export default class AccountsInfo extends LightningElement {
             } else {
                 this.columns.push({
                     label: this.results.accountColumns[i],
+                    type: this.results.accountFieldTypes[i].toLowerCase(),
+                    editable: isUpdatableField,
                     fieldName: this.results.accountFields[i]
                 });
             }
@@ -125,13 +132,20 @@ export default class AccountsInfo extends LightningElement {
 
     @api
     handleBack() {
-        this.recordId = undefined;
         this.columns = [];
         this.connectedCallback();
     }
 
     handleNewRecord() {
         this.pageType = "createRecordPage";
+    }
+
+    handleLoadFinish() {
+        this.isLoaded = true;
+    }
+
+    handleLoadStart() {
+        this.isLoaded = false;
     }
 
     handlePageNumberCheck() {

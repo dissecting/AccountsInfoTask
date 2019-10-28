@@ -15,6 +15,7 @@
                 onlast={handleLast}
                 onnew={handleNewRecord}
                 onrowid={getRecordId}
+                onrefreshtable={handleGetAccounts}
                 accounts={results.accounts}
                 columns={columns}
                 page={page}
@@ -26,6 +27,8 @@
         <div if:true={isViewPage}>
             <c-account-detail-view
                 onback={handleBack}
+                onloadform={handleLoadFinish}
+                onloadformstart={handleLoadStart}
                 fields={results.accountFields}
                 updateable-fields={results.accountUpdateableColumns}
                 record-id={recordId}>

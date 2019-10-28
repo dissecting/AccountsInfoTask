@@ -15,6 +15,8 @@ describe('c-accountDetailView', () => {
         document.body.appendChild(element);
         let handlerBack = jest.fn();
         element.addEventListener('back', handlerBack);
+        let recordForm = element.shadowRoot.querySelector('lightning-record-view-form');
+        recordForm.dispatchEvent(new CustomEvent('load'));
 
         let lhtgBtn = element.shadowRoot.querySelectorAll('lightning-button');
         lhtgBtn.forEach(btn => {

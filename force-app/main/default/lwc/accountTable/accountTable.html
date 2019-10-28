@@ -1,15 +1,17 @@
 <template>
-    <div>
+    <div class="datatable-page">
         <div class="datatable">
             <lightning-datatable
                 key-field="Id"
                 data={accounts}
                 columns={columns}
+                onsave={handleSave}
+                draft-values={draftValues}
                 hide-checkbox-column="true"
                 onrowaction={getRecordId}>
             </lightning-datatable>
         </div>
-        <div class="slds-align_absolute-center">
+        <div class="button-group slds-align_absolute-center">
             <div class="slds-text-title_bold">
                 <span>Page: {page} of {totalPages}</span>
             </div>

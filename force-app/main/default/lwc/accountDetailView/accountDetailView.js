@@ -4,13 +4,19 @@ export default class AccountDetailView extends LightningElement {
     @api recordId;
     @api fields;
     @api updateableFields;
-    isViewForm = true;
+    @api isEditForm = false;
 
     handleBack() {
         this.dispatchEvent(new CustomEvent('back'));
     }
 
-    handleChangePageMode() {
-        this.isViewForm = !this.isViewForm;
+    handleLoadViewForm() {
+        this.dispatchEvent(new CustomEvent('loadform'));
     }
+
+    handleChangePageMode() {
+        this.dispatchEvent(new CustomEvent('loadformstart'));
+        this.isEditForm = !this.isEditForm;
+    }
+
 }

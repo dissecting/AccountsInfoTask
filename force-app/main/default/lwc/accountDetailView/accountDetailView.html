@@ -1,7 +1,8 @@
 <template>
-    <div class="view-form" if:true={isViewForm}>
+    <div class="view-form" if:false={isEditForm}>
         <lightning-record-view-form
             record-id={recordId}
+            onload={handleLoadViewForm}
             object-api-name="Account">
             <div for:each={fields} for:item="field" key={field.id}>
                 <lightning-output-field
@@ -10,9 +11,10 @@
             </div>
         </lightning-record-view-form>
     </div>
-    <div class="edit-form" if:false={isViewForm}>
+    <div class="edit-form" if:true={isEditForm}>
         <lightning-record-edit-form
             record-id={recordId}
+            onload={handleLoadViewForm}
             onsuccess={handleChangePageMode}
             object-api-name="Account">
             <div for:each={updateableFields} for:item="field" key={field.id}>
@@ -29,8 +31,8 @@
             </lightning-button>
         </lightning-record-edit-form>
     </div>
-    <div class="button">
-        <lightning-button if:true={isViewForm}
+    <div class="button-group">
+        <lightning-button if:false={isEditForm}
             class="slds-m-top_small slds-align_absolute-center"
             variant="brand"
             name="edit"
