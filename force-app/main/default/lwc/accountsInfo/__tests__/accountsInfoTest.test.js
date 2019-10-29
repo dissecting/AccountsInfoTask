@@ -79,7 +79,7 @@ describe('c-accountsInfo', () => {
         document.body.appendChild(element);
 
         return flushPromises().then(() => {
-            const errorInfinitySpinner = element.shadowRoot.querySelector('div');
+            const errorInfinitySpinner = element.shadowRoot.querySelector('lightning-spinner');
             expect(errorInfinitySpinner).not.toBeNull();
         });
     });
