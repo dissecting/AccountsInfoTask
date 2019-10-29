@@ -12,20 +12,21 @@ export default class AccountTable extends LightningElement {
     @api draftValues = [];
 
     handleNewRecord() {
-        this.dispatchEvent(new CustomEvent('new'));
+        this.dispatchEvent(new CustomEvent('newrecord'));
     }
 
     getRecordId(event) {
-        this.dispatchEvent(new CustomEvent('rowid', { detail: event.detail.row.Id }));
+        this.dispatchEvent(new CustomEvent('rowid', { detail: event.detail }));
     }
 
     handlePrevious() {
-        this.dispatchEvent(new CustomEvent('previous'));
+        this.dispatchEvent(new CustomEvent('previouspage'));
     }
 
     handleSave(event) {
         const recordInputs =  event.detail.draftValues.slice().map(draft => {
             const fields = Object.assign({}, draft);
+
             return { fields };
         });
         const promises = recordInputs.map(recordInput => updateRecord(recordInput));
@@ -52,14 +53,14 @@ export default class AccountTable extends LightningElement {
     }
 
     handleNext() {
-        this.dispatchEvent(new CustomEvent('next'));
+        this.dispatchEvent(new CustomEvent('nextpage'));
     }
 
     handleFirst() {
-        this.dispatchEvent(new CustomEvent('first'));
+        this.dispatchEvent(new CustomEvent('firstpage'));
     }
 
     handleLast() {
-        this.dispatchEvent(new CustomEvent('last'));
+        this.dispatchEvent(new CustomEvent('lastpage'));
     }
 }

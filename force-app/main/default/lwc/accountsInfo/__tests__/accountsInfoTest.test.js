@@ -42,6 +42,12 @@ describe('c-accountsInfo', () => {
     }
 
     it('get results', () => {
+        const ACCOUNT = {
+            row: [{
+                "Id": "0016F00003RRsUfQAL",
+                "Name": "Test1"
+            }]
+        };
 
         getAccountList.mockResolvedValue(APEX_ACCOUNTS_SUCCESS);
 
@@ -52,12 +58,12 @@ describe('c-accountsInfo', () => {
 
         return flushPromises().then(() => {
             let accTable = element.shadowRoot.querySelector('c-account-table');
-            accTable.dispatchEvent(new CustomEvent('rowid'));
-            accTable.dispatchEvent(new CustomEvent('next'));
-            accTable.dispatchEvent(new CustomEvent('previous'));
-            accTable.dispatchEvent(new CustomEvent('last'));
-            accTable.dispatchEvent(new CustomEvent('first'));
-            accTable.dispatchEvent(new CustomEvent('new'));
+            accTable.dispatchEvent(new CustomEvent('rowid', {detail: ACCOUNT}));
+            accTable.dispatchEvent(new CustomEvent('nextpage'));
+            accTable.dispatchEvent(new CustomEvent('previouspage'));
+            accTable.dispatchEvent(new CustomEvent('lastpage'));
+            accTable.dispatchEvent(new CustomEvent('firstpage'));
+            accTable.dispatchEvent(new CustomEvent('newrecord'));
             element.handleBack();
             expect(accTable).not.toBeNull();
         });

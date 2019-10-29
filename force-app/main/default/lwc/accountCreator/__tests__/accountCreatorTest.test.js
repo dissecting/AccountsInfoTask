@@ -27,6 +27,7 @@ describe('c-accountCreator', () => {
         element.addEventListener('back', handlerBack);
         let lhtgBtn = element.shadowRoot.querySelector('lightning-button');
         lhtgBtn.click();
+
         return Promise.resolve().then(() => {
             expect(mockFn.mock.calls[0][0].detail.title).toBe('Success!');
             expect(mockFn.mock.calls[0][0].detail.message).toBe('Account successfully created!');

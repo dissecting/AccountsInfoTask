@@ -9,6 +9,20 @@ describe('c-accountTable', () => {
     });
 
     it('pagination', () => {
+        const ACCOUNT = {
+            row: [{
+                "Id": "0016F00003RRsUfQAL",
+                "Name": "Test1"
+            }]
+        };
+
+        const newAccount = {
+            draftValues: [{
+                Id: "0016F00003RRsUfQAL",
+                Name: "Test2"
+            }]
+        };
+
         let element = createElement('c-accountTable', {
             is: AccountTable
         });
@@ -18,18 +32,26 @@ describe('c-accountTable', () => {
         let handlerNext = jest.fn();
         let handlerLast = jest.fn();
         let handlerNewRecord = jest.fn();
-        element.addEventListener('first', handlerFirst);
-        element.addEventListener('previous', handlerPrevious);
-        element.addEventListener('next', handlerNext);
-        element.addEventListener('last', handlerLast);
-        element.addEventListener('new', handlerNewRecord);
+        let handlerGetRecordId = jest.fn();
+
+        element.addEventListener('rowid', handlerGetRecordId);
+        element.addEventListener('firstpage', handlerFirst);
+        element.addEventListener('previouspage', handlerPrevious);
+        element.addEventListener('nextpage', handlerNext);
+        element.addEventListener('lastpage', handlerLast);
+        element.addEventListener('newrecord', handlerNewRecord);
 
         let lhtgBtn = element.shadowRoot.querySelectorAll('lightning-button');
         lhtgBtn.forEach(btn => {
             btn.click();
         });
 
+        let lhtgDataTable = element.shadowRoot.querySelector('lightning-datatable');
+        lhtgDataTable.dispatchEvent(new CustomEvent('rowaction', {detail: ACCOUNT}));
+        lhtgDataTable.dispatchEvent(new CustomEvent('save', {detail: newAccount}));
+
         return Promise.resolve().then(() => {
+            expect(handlerGetRecordId.mock.calls.length).toBe(1);
             expect(handlerFirst.mock.calls.length).toBe(1);
             expect(handlerPrevious.mock.calls.length).toBe(1);
             expect(handlerNext.mock.calls.length).toBe(1);

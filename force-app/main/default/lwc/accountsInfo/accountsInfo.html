@@ -9,11 +9,11 @@
         </div>
         <div if:true={isTablePage}>
             <c-account-table
-                onprevious={handlePrevious}
-                onnext={handleNext}
-                onfirst={handleFirst}
-                onlast={handleLast}
-                onnew={handleNewRecord}
+                onpreviouspage={handlePrevious}
+                onnextpage={handleNext}
+                onfirstpage={handleFirst}
+                onlastpage={handleLast}
+                onnewrecord={handleNewRecord}
                 onrowid={getRecordId}
                 onrefreshtable={handleGetAccounts}
                 accounts={results.accounts}

@@ -90,13 +90,19 @@ export default class AccountsInfo extends LightningElement {
             let isUpdatableField;
             isUpdatableField = this.results.accountUpdateableColumns.includes(this.results.accountFields[i]) ?
                 true : false;
+
             if (this.results.accountFields[i] === 'Name') {
+                this.columns.push({
+                    fieldName: this.results.accountFields[i],
+                    initialWidth: 30,
+                    type: 'button',
+                    typeAttributes: {label: 'View', variant: 'base'}
+                });
                 this.columns.push({
                     label: this.results.accountColumns[i],
                     fieldName: this.results.accountFields[i],
-                    editable: isUpdatableField,
-                    type: 'button',
-                    typeAttributes: {label: { fieldName: 'Name' }, variant: 'base'}
+                    type: this.results.accountFieldTypes[i].toLowerCase(),
+                    editable: isUpdatableField
                 });
             } else if (this.results.accountFieldTypes[i] === 'DATETIME') {
                 this.columns.push({
@@ -126,7 +132,8 @@ export default class AccountsInfo extends LightningElement {
     }
 
     getRecordId(event) {
-        this.recordId = event.detail;
+        this.handleLoadStart();
+        this.recordId = event.detail.row.Id;
         this.pageType = "viewPage";
     }
 
