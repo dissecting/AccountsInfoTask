@@ -9,6 +9,36 @@ describe('c-accountTable', () => {
     });
 
     it('pagination', () => {
+        let element = createElement('c-accountTable', {
+            is: AccountTable
+        });
+
+        document.body.appendChild(element);
+
+        let handlerFirst = jest.fn();
+        let handlerPrevious = jest.fn();
+        let handlerNext = jest.fn();
+        let handlerLast = jest.fn();
+
+        element.addEventListener('firstpage', handlerFirst);
+        element.addEventListener('previouspage', handlerPrevious);
+        element.addEventListener('nextpage', handlerNext);
+        element.addEventListener('lastpage', handlerLast);
+
+        let lhtgBtn = element.shadowRoot.querySelectorAll('lightning-button');
+        lhtgBtn.forEach(btn => {
+            btn.click();
+        });
+
+        return Promise.resolve().then(() => {
+            expect(handlerFirst.mock.calls.length).toBe(1);
+            expect(handlerPrevious.mock.calls.length).toBe(1);
+            expect(handlerNext.mock.calls.length).toBe(1);
+            expect(handlerLast.mock.calls.length).toBe(1);
+        });
+    });
+
+    it('inline edit', () => {
         const ACCOUNT = {
             row: [{
                 "Id": "0016F00003RRsUfQAL",
@@ -26,19 +56,13 @@ describe('c-accountTable', () => {
         let element = createElement('c-accountTable', {
             is: AccountTable
         });
+
         document.body.appendChild(element);
-        let handlerFirst = jest.fn();
-        let handlerPrevious = jest.fn();
-        let handlerNext = jest.fn();
-        let handlerLast = jest.fn();
+
         let handlerNewRecord = jest.fn();
         let handlerGetRecordId = jest.fn();
 
         element.addEventListener('rowid', handlerGetRecordId);
-        element.addEventListener('firstpage', handlerFirst);
-        element.addEventListener('previouspage', handlerPrevious);
-        element.addEventListener('nextpage', handlerNext);
-        element.addEventListener('lastpage', handlerLast);
         element.addEventListener('newrecord', handlerNewRecord);
 
         let lhtgBtn = element.shadowRoot.querySelectorAll('lightning-button');
@@ -52,12 +76,7 @@ describe('c-accountTable', () => {
 
         return Promise.resolve().then(() => {
             expect(handlerGetRecordId.mock.calls.length).toBe(1);
-            expect(handlerFirst.mock.calls.length).toBe(1);
-            expect(handlerPrevious.mock.calls.length).toBe(1);
-            expect(handlerNext.mock.calls.length).toBe(1);
-            expect(handlerLast.mock.calls.length).toBe(1);
             expect(handlerNewRecord.mock.calls.length).toBe(1);
         });
-
     });
 });
